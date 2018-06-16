@@ -1,0 +1,51 @@
+{
+  "packages": [
+    {
+      "name": "arndt",
+      "maintainer": "Arndt",
+      "websiteURL": "https://bitbucket.org/plcdev",
+      "email": "m3@arndt.website",
+      "help": {
+        "online": "https://bitbucket.org/plcdev/m3/wiki/Home"
+      },
+      "platforms": [
+        {
+          "name": "Arndt M3 (32Bit ARM Cortex-M0+) boards",
+          "architecture": "samd",
+          "version": "%VERSION%",
+          "category": "Arduino",
+          "url": "https://bitbucket.org/plcdev/m3/raw/e8896ccdf0baacf62e2fa59080b014a19f61615e/arduino/arndtm3-samd-%VERSION%.tar.bz2",
+          "archiveFileName": "%ARCHIVE%",
+          "checksum": "SHA-256:%SHA256%",
+          "size": "%SIZE%",
+          "boards": [
+            { "name": "Arndt M3/Rev. A" }
+          ],
+          "toolsDependencies": [
+            {
+              "packager": "arduino",
+              "name": "arm-none-eabi-gcc",
+              "version": "4.8.3-2014q1"
+            },
+            {
+              "packager": "arduino",
+              "name": "bossac",
+              "version": "1.6.1-arduino"
+            },
+            {
+              "packager": "arduino",
+              "name": "openocd",
+              "version": "0.9.0-arduino"
+            },
+            {
+              "packager": "arduino",
+              "name": "CMSIS",
+              "version": "4.0.0-atmel"
+            }
+          ]
+        }
+      ],
+      "tools": []
+    }
+  ]
+}
