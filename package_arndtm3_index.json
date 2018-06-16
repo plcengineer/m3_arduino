@@ -3,10 +3,10 @@
     {
       "name": "arndt",
       "maintainer": "Arndt",
-      "websiteURL": "https://bitbucket.org/plcdev",
+      "websiteURL": "https://github.com/plcengineer",
       "email": "m3@arndt.website",
       "help": {
-        "online": "https://bitbucket.org/plcdev/m3/wiki/Home"
+        "online": "https://github.com/plcengineer/m3_arduino/wiki"
       },
       "platforms": [
         {
@@ -14,7 +14,7 @@
           "architecture": "samd",
           "version": "0.4.0",
           "category": "Arduino",
-          "url": "https://www.dropbox.com/sh/zpwgts9ghgubbhm/AADTc1SWAMBlWdDSR0_hCtVEa/arndtm3-samd-0.4.0.tar.bz2?dl=0",
+          "url": "https://github.com/plcengineer/m3_arduino/blob/master/arndtm3-samd-0.4.0.tar.bz2?raw=true",
           "archiveFileName": "arndtm3-samd-0.4.0.tar.bz2",
           "checksum": "SHA-256:546bc9eec9f2413020d46a54d1a19918c98fa26d095f83e8d5f6944e60227c2d",
           "size": "1043858",
