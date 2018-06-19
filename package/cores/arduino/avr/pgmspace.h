@@ -44,8 +44,8 @@ typedef int16_t prog_int16_t;
 typedef uint16_t prog_uint16_t;
 typedef int32_t prog_int32_t;
 typedef uint32_t prog_uint32_t;
-typedef int32_t prog_int64_t;
-typedef uint32_t prog_uint64_t;
+typedef int64_t prog_int64_t;
+typedef uint64_t prog_uint64_t;
 
 typedef const void* int_farptr_t;
 typedef const void* uint_farptr_t;
@@ -97,12 +97,13 @@ typedef const void* uint_farptr_t;
 #define memcmp_PF(s1, s2, n) memcmp((s1), (s2), (n))
 
 #define sprintf_P(s, f, ...) sprintf((s), (f), __VA_ARGS__)
+#define snprintf_P(s, f, ...) snprintf((s), (f), __VA_ARGS__)
 
 #define pgm_read_byte(addr) (*(const unsigned char *)(addr))
 #define pgm_read_word(addr) (*(const unsigned short *)(addr))
 #define pgm_read_dword(addr) (*(const unsigned long *)(addr))
 #define pgm_read_float(addr) (*(const float *)(addr))
-#define pgm_read_ptr(addr) (*(const void *)(addr))
+#define pgm_read_ptr(addr) (*(const void **)(addr))
 
 #define pgm_read_byte_near(addr) pgm_read_byte(addr)
 #define pgm_read_word_near(addr) pgm_read_word(addr)

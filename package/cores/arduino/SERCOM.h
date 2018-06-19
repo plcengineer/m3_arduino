@@ -21,7 +21,8 @@
 
 #include "sam.h"
 
-#define SERCOM_FREQ_REF 48000000
+#define SERCOM_FREQ_REF      48000000
+#define SERCOM_NVIC_PRIORITY ((1<<__NVIC_PRIO_BITS) - 1)
 
 typedef enum
 {
@@ -155,7 +156,6 @@ class SERCOM
 		void flushUART( void ) ;
 		void clearStatusUART( void ) ;
 		bool availableDataUART( void ) ;
-        bool isTransmitComplete( void ) ;
 		bool isBufferOverflowErrorUART( void ) ;
 		bool isFrameErrorUART( void ) ;
 		bool isParityErrorUART( void ) ;
@@ -164,6 +164,8 @@ class SERCOM
 		int writeDataUART(uint8_t data) ;
 		bool isUARTError() ;
 		void acknowledgeUARTError() ;
+		void enableDataRegisterEmptyInterruptUART();
+		void disableDataRegisterEmptyInterruptUART();
 
 		/* ========== SPI ========== */
 		void initSPI(SercomSpiTXPad mosi, SercomRXPad miso, SercomSpiCharSize charSize, SercomDataOrder dataOrder) ;
@@ -176,15 +178,14 @@ class SERCOM
 		SercomDataOrder getDataOrderSPI( void ) ;
 		void setBaudrateSPI(uint8_t divider) ;
 		void setClockModeSPI(SercomSpiClockMode clockMode) ;
-		void writeDataSPI(uint8_t data) ;
-		uint16_t readDataSPI( void ) ;
+		uint8_t transferDataSPI(uint8_t data) ;
 		bool isBufferOverflowErrorSPI( void ) ;
 		bool isDataRegisterEmptySPI( void ) ;
 		bool isTransmitCompleteSPI( void ) ;
 		bool isReceiveCompleteSPI( void ) ;
 
 		/* ========== WIRE ========== */
-		void initSlaveWIRE(uint8_t address) ;
+		void initSlaveWIRE(uint8_t address, bool enableGeneralCall = false) ;
 		void initMasterWIRE(uint32_t baudrate) ;
 
 		void resetWIRE( void ) ;

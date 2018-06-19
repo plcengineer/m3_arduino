@@ -28,17 +28,16 @@ class Uart : public HardwareSerial
 {
   public:
     Uart(SERCOM *_s, uint8_t _pinRX, uint8_t _pinTX, SercomRXPad _padRX, SercomUartTXPad _padTX);
+    Uart(SERCOM *_s, uint8_t _pinRX, uint8_t _pinTX, SercomRXPad _padRX, SercomUartTXPad _padTX, uint8_t _pinRTS, uint8_t _pinCTS);
     void begin(unsigned long baudRate);
     void begin(unsigned long baudrate, uint16_t config);
     void end();
     int available();
+    int availableForWrite();
     int peek();
     int read();
     void flush();
-    bool isTxComplete( void ) ;
-
     size_t write(const uint8_t data);
-    size_t write(const uint8_t *buffer, size_t size);
     using Print::write; // pull in write(str) and write(buf, size) from Print
 
     void IrqHandler();
@@ -48,10 +47,17 @@ class Uart : public HardwareSerial
   private:
     SERCOM *sercom;
     RingBuffer rxBuffer;
+    RingBuffer txBuffer;
+
     uint8_t uc_pinRX;
     uint8_t uc_pinTX;
     SercomRXPad uc_padRX;
     SercomUartTXPad uc_padTX;
+    uint8_t uc_pinRTS;
+    volatile uint32_t* pul_outsetRTS;
+    volatile uint32_t* pul_outclrRTS;
+    uint32_t ul_pinMaskRTS;
+    uint8_t uc_pinCTS;
 
     SercomNumberStopBit extractNbStopBit(uint16_t config);
     SercomUartCharSize extractCharSize(uint16_t config);

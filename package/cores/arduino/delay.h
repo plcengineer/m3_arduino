@@ -19,12 +19,12 @@
 #ifndef _DELAY_
 #define _DELAY_
 
+#include <stdint.h>
+#include "variant.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <stdint.h>
-#include "variant.h"
 
 /**
  * \brief Returns the number of milliseconds since the Arduino board began running the current program.
@@ -33,8 +33,8 @@ extern "C" {
  *
  * \return Number of milliseconds since the program started (uint32_t)
  */
-uint32_t _millis(void);
-extern uint32_t (*millis)(void);
+unsigned long _millis(void);
+extern unsigned long (*millis)(void);
 
 /**
  * \brief Returns the number of microseconds since the Arduino board began running the current program.
@@ -46,8 +46,8 @@ extern uint32_t (*millis)(void);
  *
  * \note There are 1,000 microseconds in a millisecond and 1,000,000 microseconds in a second.
  */
-uint32_t _micros(void);
-extern uint32_t (*micros)(void);
+unsigned long _micros(void);
+extern unsigned long (*micros)(void);
 
 /**
  * \brief Pauses the program for the amount of time (in miliseconds) specified as parameter.
@@ -55,16 +55,16 @@ extern uint32_t (*micros)(void);
  *
  * \param dwMs the number of milliseconds to pause (uint32_t)
  */
-void _delay(uint32_t dwMs);
-extern void (*delay)(uint32_t dwMs);
+void _delay(unsigned long dwMs);
+extern void (*delay)(unsigned long dwMs);
 
 /**
  * \brief Pauses the program for the amount of time (in microseconds) specified as parameter.
  *
  * \param dwUs the number of microseconds to pause (uint32_t)
  */
-static __inline__ void _delayMicroseconds( uint32_t ) __attribute__((always_inline, unused)) ;
-static __inline__ void _delayMicroseconds( uint32_t usec )
+static __inline__ void _delayMicroseconds( unsigned int ) __attribute__((always_inline, unused)) ;
+static __inline__ void _delayMicroseconds( unsigned int usec )
 {
   if ( usec == 0 )
   {
@@ -99,7 +99,7 @@ static __inline__ void _delayMicroseconds( uint32_t usec )
   // https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html
   // https://gcc.gnu.org/onlinedocs/gcc/Extended-Asm.html#Volatile
 }
-extern void (*delayMicroseconds)(uint32_t);
+extern void (*delayMicroseconds)(unsigned int);
 
 #ifdef __cplusplus
 }

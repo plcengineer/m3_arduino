@@ -1,11 +1,12 @@
 # Arduino Core for SAMD21 CPU
 
-This repository containts the source code and configuration files of the board variant Arndt-M3
-with Atmel's SAMD21 processor (used on the Arduino Zero board).
+This repository contains the source code and configuration files of the Arduino Core
+for Atmel's SAMD21 processor (used on the Arduino/Genuino Zero, MKR1000 and MKRZero boards).
 
 ## Installation on Arduino IDE
 
-Before you can use this package, please install following package in the Arduino IDE cores manager:
+This core is available as a package in the Arduino IDE cores manager.
+Just open the "Boards Manager" and install the package called:
 
 "Arduino SAMD Boards (32-bit ARM Cortex-M0+)"
 
@@ -37,7 +38,7 @@ Pull Request on github.
 
 ## License and credits
 
-The core package "Arduino SAMD Boards (32-bit ARM Cortex-M0+)" has been developed by Arduino LLC in collaboration with Atmel.
+This core has been developed by Arduino LLC in collaboration with Atmel.
 
 ```
   Copyright (c) 2015 Arduino LLC.  All right reserved.

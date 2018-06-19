@@ -19,6 +19,9 @@
 #ifndef _VARIANT_ARNDT_M3_
 #define _VARIANT_ARNDT_M3_
 
+// The definitions here needs a SAMD core >=1.6.10
+#define ARDUINO_SAMD_VARIANT_COMPLIANCE 10610
+
 /*----------------------------------------------------------------------------
  *        Definitions
  *----------------------------------------------------------------------------*/
@@ -54,6 +57,7 @@ extern "C"
 #define NUM_DIGITAL_PINS     (14u)
 #define NUM_ANALOG_INPUTS    (6u)
 #define NUM_ANALOG_OUTPUTS   (1u)
+#define analogInputToDigitalPin(p)  ((p < 6u) ? (p) + 14u : -1)
 
 #define digitalPinToPort(P)        ( &(PORT->Group[g_APinDescription[P].ulPort]) )
 #define digitalPinToBitMask(P)     ( 1 << g_APinDescription[P].ulPin )
@@ -95,14 +99,18 @@ extern "C"
 #define PIN_A5               (19ul)
 #define PIN_DAC0			 (35ul)
 
-static const uint8_t A0  = PIN_A0 ;
-static const uint8_t A1  = PIN_A1 ;
-static const uint8_t A2  = PIN_A2 ;
-static const uint8_t A3  = PIN_A3 ;
-static const uint8_t A4  = PIN_A4 ;
-static const uint8_t A5  = PIN_A5 ;
-static const uint8_t DAC0 = PIN_DAC0 ;
+static const uint8_t A0  = PIN_A0;
+static const uint8_t A1  = PIN_A1;
+static const uint8_t A2  = PIN_A2;
+static const uint8_t A3  = PIN_A3;
+static const uint8_t A4  = PIN_A4;
+static const uint8_t A5  = PIN_A5;
+static const uint8_t DAC0 = PIN_DAC0;
 #define ADC_RESOLUTION		12
+
+// Other pins
+//#define PIN_ATN              (38ul) // not on small footprint chip
+//static const uint8_t ATN = PIN_ATN;
 
 /*
  * Serial interfaces
@@ -131,15 +139,12 @@ static const uint8_t DAC0 = PIN_DAC0 ;
  */
 #define SPI_INTERFACES_COUNT 1
 
-#define PIN_SPI_MISO         (20u)
-#define PIN_SPI_MOSI         (21u)
-#define PIN_SPI_SCK          (22u)
-
-#ifndef PERIPH_SPI
-    #define PERIPH_SPI           sercom2
-    #define PAD_SPI_TX           SPI_PAD_2_SCK_3
-    #define PAD_SPI_RX           SERCOM_RX_PAD_0
-#endif // PERIPH_SPI
+#define PIN_SPI_MISO         (22u)
+#define PIN_SPI_MOSI         (23u)
+#define PIN_SPI_SCK          (24u)
+#define PERIPH_SPI           sercom2
+#define PAD_SPI_TX           SPI_PAD_2_SCK_3
+#define PAD_SPI_RX           SERCOM_RX_PAD_0
 
 static const uint8_t SS	  = PIN_A1 ;	// SERCOM2 last PAD is present on A1 but HW SS isn't used. Set here only for reference.
 static const uint8_t MOSI = PIN_SPI_MOSI ;
@@ -154,6 +159,11 @@ static const uint8_t SCK  = PIN_SPI_SCK ;
 // I2C with pull up resistors
 #define PIN_WIRE_SDA         (28u)
 #define PIN_WIRE_SCL         (29u)
+#define PERIPH_WIRE          sercom3
+#define WIRE_IT_HANDLER      SERCOM3_Handler
+
+static const uint8_t SDA = PIN_WIRE_SDA;
+static const uint8_t SCL = PIN_WIRE_SCL;
 
 /*
  * USB
@@ -161,6 +171,17 @@ static const uint8_t SCK  = PIN_SPI_SCK ;
 #define PIN_USB_HOST_ENABLE (25ul)
 #define PIN_USB_DM          (26ul)
 #define PIN_USB_DP          (27ul)
+
+/*
+ * I2S Interfaces
+ */
+//#define I2S_INTERFACES_COUNT 1
+
+//#define I2S_DEVICE          0
+//#define I2S_CLOCK_GENERATOR 3
+//#define PIN_I2S_SD          (9u)
+//#define PIN_I2S_SCK         (1u)
+//#define PIN_I2S_FS          (0u)
 
 #ifdef __cplusplus
 }

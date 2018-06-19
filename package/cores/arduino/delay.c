@@ -26,8 +26,8 @@ extern "C" {
 /** Tick Counter united by ms */
 static volatile uint32_t _ulTickCount=0 ;
 
-uint32_t (*millis) (void) = &_millis;
-uint32_t _millis(void)
+unsigned long (*millis) (void) = &_millis;
+unsigned long _millis(void)
 {
 // todo: ensure no interrupts
   return _ulTickCount ;
@@ -38,8 +38,8 @@ uint32_t _millis(void)
 // When it appears that millis counter and pending is stable and SysTick hasn't rolled over, use these
 // values to calculate micros. If there is a pending SysTick, add one to the millis counter in the calculation.
 
-uint32_t (*micros) ( void ) = &_micros;
-uint32_t _micros(void)
+unsigned long (*micros) ( void ) = &_micros;
+unsigned long _micros(void)
 {
   uint32_t ticks, ticks2;
   uint32_t pend, pend2;
@@ -64,8 +64,8 @@ uint32_t _micros(void)
   // a runtime multiplication and shift, saving a few cycles
 }
 
-void (*delay) (uint32_t dwMs) = &_delay;
-void _delay( uint32_t ms )
+void (*delay) (unsigned long dwMs) = &_delay;
+void _delay( unsigned long ms )
 {
   if ( ms == 0 )
   {
@@ -80,7 +80,7 @@ void _delay( uint32_t ms )
   } while ( _ulTickCount - start < ms ) ;
 }
 
-void (*delayMicroseconds) (uint32_t) = &_delayMicroseconds;
+void (*delayMicroseconds) (unsigned long) = &_delayMicroseconds;
 
 #include "Reset.h" // for tickReset()
 

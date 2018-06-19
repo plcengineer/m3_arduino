@@ -112,6 +112,26 @@ void SPIClass::usingInterrupt(int interruptNumber)
     interrupts();
 }
 
+void SPIClass::notUsingInterrupt(int interruptNumber)
+{
+  if ((interruptNumber == NOT_AN_INTERRUPT) || (interruptNumber == EXTERNAL_INT_NMI))
+    return;
+
+  if (interruptMode & SPI_IMODE_GLOBAL)
+    return; // can't go back, as there is no reference count
+
+  uint8_t irestore = interruptsStatus();
+  noInterrupts();
+
+  interruptMask &= ~(1 << interruptNumber);
+
+  if (interruptMask == 0)
+    interruptMode = SPI_IMODE_NONE;
+
+  if (irestore)
+    interrupts();
+}
+
 void SPIClass::beginTransaction(SPISettings settings)
 {
   if (interruptMode != SPI_IMODE_NONE)
@@ -187,11 +207,7 @@ void SPIClass::setClockDivider(uint8_t div)
 
 byte SPIClass::transfer(uint8_t data)
 {
-  // Writing the data
-  _p_sercom->writeDataSPI(data);
-
-  // Read data
-  return _p_sercom->readDataSPI() & 0xFF;
+  return _p_sercom->transferDataSPI(data);
 }
 
 uint16_t SPIClass::transfer16(uint16_t data) {
@@ -208,6 +224,15 @@ uint16_t SPIClass::transfer16(uint16_t data) {
   }
 
   return t.val;
+}
+
+void SPIClass::transfer(void *buf, size_t count)
+{
+  uint8_t *buffer = reinterpret_cast<uint8_t *>(buf);
+  for (size_t i=0; i<count; i++) {
+    *buffer = transfer(*buffer);
+    buffer++;
+  }
 }
 
 void SPIClass::attachInterrupt() {
