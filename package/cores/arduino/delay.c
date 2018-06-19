@@ -80,7 +80,7 @@ void _delay( unsigned long ms )
   } while ( _ulTickCount - start < ms ) ;
 }
 
-void (*delayMicroseconds) (unsigned long) = &_delayMicroseconds;
+void (*delayMicroseconds) (unsigned int) = &_delayMicroseconds;
 
 #include "Reset.h" // for tickReset()
 

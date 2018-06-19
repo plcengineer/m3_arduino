@@ -16,8 +16,8 @@
           "category": "Arduino",
           "url": "https://github.com/plcengineer/m3_arduino/blob/master/arndtm3-samd-0.5.0.tar.bz2?raw=true",
           "archiveFileName": "arndtm3-samd-0.5.0.tar.bz2",
-          "checksum": "SHA-256:44fb7253489e50e65ba92dff148b312dbaf37499986c9303a7604dd32006c9c7",
-          "size": "906879",
+          "checksum": "SHA-256:b46e0e37fcc3a1343463a4adbb7277c1055890fe47652d7c4898057356b31a9e",
+          "size": "907232",
           "boards": [
             { "name": "Arndt M3/Rev. A" }
           ],
