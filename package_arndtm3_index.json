@@ -12,12 +12,12 @@
         {
           "name": "Arndt M3 (32Bit ARM Cortex-M0+) boards",
           "architecture": "samd",
-          "version": "0.5.0",
+          "version": "0.5.1",
           "category": "Arduino",
-          "url": "https://github.com/plcengineer/m3_arduino/blob/master/arndtm3-samd-0.5.0.tar.bz2?raw=true",
-          "archiveFileName": "arndtm3-samd-0.5.0.tar.bz2",
-          "checksum": "SHA-256:b46e0e37fcc3a1343463a4adbb7277c1055890fe47652d7c4898057356b31a9e",
-          "size": "907232",
+          "url": "https://github.com/plcengineer/m3_arduino/blob/master/arndtm3-samd-0.5.1.tar.bz2?raw=true",
+          "archiveFileName": "arndtm3-samd-0.5.1.tar.bz2",
+          "checksum": "SHA-256:e20792a74efbf6d2608ced8c3e64d27e705aa75c529e8e7669803cb8b5e87341",
+          "size": "907106",
           "boards": [
             { "name": "Arndt M3/Rev. A" }
           ],
